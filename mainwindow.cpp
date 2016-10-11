@@ -58,6 +58,8 @@ void MainWindow::showToken()
 	Lexical::lexicalAnalyze (ui->code->toPlainText ());
 	ui->token->setText (QString("row\tcol\ttoken\t\t\tvalue\t\n"));
 
+	ui->error->setText ("----------------- ERROR LIST ------------------\n");
+
 	auto tokens = Lexical::getTokens ();
 	auto start = tokens.begin (), end = tokens.end ();
 
@@ -67,7 +69,14 @@ void MainWindow::showToken()
 				.arg (start->getColumn ())
 				.arg (start->getToken ())
 				.arg (start->getValue ()));
+//		qDebug() << start->getColumn () << endl;
 		++start;
+	}
+
+	auto errorStart = ErrorLog::getLexicalErrors ().begin ();
+	auto errorEnd  = ErrorLog::getLexicalErrors ().end ();
+	while (errorStart < errorEnd) {
+		ui->error->append (*errorStart++);
 	}
 }
 

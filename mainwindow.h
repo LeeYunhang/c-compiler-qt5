@@ -14,7 +14,7 @@
 #include "QTextBlockFormat"
 #include "QScrollBar"
 
-
+#include "errorlog.h"
 #include "lexical.h"
 namespace Ui {
 class MainWindow;

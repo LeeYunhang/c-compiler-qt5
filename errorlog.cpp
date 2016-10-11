@@ -1,11 +1,23 @@
 #include "errorlog.h"
 
+QVector<QString> ErrorLog::lexicalErrors;
+
+QVector<QString> ErrorLog::getLexicalErrors()
+{
+	return lexicalErrors;
+}
+
+void ErrorLog::clear()
+{
+	lexicalErrors.resize (0);
+}
+
 ErrorLog::ErrorLog()
 {
 
 }
 
-QString ErrorLog::generateLexicalError(int row, int column, const QString &reason)
+void ErrorLog::generateLexicalError(int row, int column, const QString &reason)
 {
-    return QString("Error in: row %1, column %2 reason:%3.").arg (row).arg (column).arg(reason);
+	lexicalErrors.push_back (QString("Error in: row %1, column %2. reason:%3.").arg (row).arg (column).arg(reason));
 }
